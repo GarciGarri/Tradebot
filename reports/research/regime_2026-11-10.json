@@ -1,0 +1,733 @@
+{
+ "generated": "2026-11-10T00:50:17Z",
+ "gaps": [],
+ "sources": {
+  "global": {
+   "url": "https://api.coingecko.com/api/v3/global",
+   "fetched": "2026-11-10T00:50:08Z",
+   "ok": true
+  },
+  "markets": {
+   "url": "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&price_change_percentage=24h,7d,30d,200d,1y",
+   "fetched": "2026-11-10T00:50:10Z",
+   "ok": true
+  },
+  "btc_daily": {
+   "url": "https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=86400",
+   "fetched": "2026-11-10T00:50:12Z",
+   "ok": true
+  },
+  "eth_daily": {
+   "url": "https://api.exchange.coinbase.com/products/ETH-USD/candles?granularity=86400",
+   "fetched": "2026-11-10T00:50:12Z",
+   "ok": true
+  },
+  "perps": {
+   "url": "https://api.coinbase.com/api/v3/brokerage/market/products?product_type=FUTURE&limit=250",
+   "fetched": "2026-11-10T00:50:12Z",
+   "ok": true
+  },
+  "stables": {
+   "url": "https://stablecoins.llama.fi/stablecoincharts/all",
+   "fetched": "2026-11-10T00:50:12Z",
+   "ok": true
+  },
+  "hyperliquid": {
+   "url": "https://api.hyperliquid.xyz/info",
+   "fetched": "2026-11-10T00:50:12Z",
+   "ok": true
+  },
+  "okx_btc_funding": {
+   "url": "https://www.okx.com/api/v5/public/funding-rate?instId=BTC-USDT-SWAP",
+   "fetched": "2026-11-10T00:50:13Z",
+   "ok": true
+  },
+  "okx_eth_funding": {
+   "url": "https://www.okx.com/api/v5/public/funding-rate?instId=ETH-USDT-SWAP",
+   "fetched": "2026-11-10T00:50:13Z",
+   "ok": true
+  },
+  "okx_btc_oi": {
+   "url": "https://www.okx.com/api/v5/rubik/stat/contracts/open-interest-volume?ccy=BTC&period=1D",
+   "fetched": "2026-11-10T00:50:13Z",
+   "ok": true
+  },
+  "okx_eth_oi": {
+   "url": "https://www.okx.com/api/v5/rubik/stat/contracts/open-interest-volume?ccy=ETH&period=1D",
+   "fetched": "2026-11-10T00:50:14Z",
+   "ok": true
+  },
+  "fear_greed": {
+   "url": "https://api.alternative.me/fng/?limit=35",
+   "fetched": "2026-11-10T00:50:14Z",
+   "ok": true
+  },
+  "fred_DGS10": {
+   "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-04-24",
+   "fetched": "2026-11-10T00:50:14Z",
+   "ok": true
+  },
+  "fred_DGS2": {
+   "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=2026-04-24",
+   "fetched": "2026-11-10T00:50:14Z",
+   "ok": true
+  },
+  "fred_DFF": {
+   "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFF&cosd=2026-04-24",
+   "fetched": "2026-11-10T00:50:15Z",
+   "ok": true
+  },
+  "fred_DTWEXBGS": {
+   "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DTWEXBGS&cosd=2026-04-24",
+   "fetched": "2026-11-10T00:50:16Z",
+   "ok": true
+  },
+  "fred_SP500": {
+   "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2026-04-24",
+   "fetched": "2026-11-10T00:50:16Z",
+   "ok": true
+  },
+  "fred_VIXCLS": {
+   "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-04-24",
+   "fetched": "2026-11-10T00:50:17Z",
+   "ok": true
+  },
+  "fred_BAMLH0A0HYM2": {
+   "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=BAMLH0A0HYM2&cosd=2026-04-24",
+   "fetched": "2026-11-10T00:50:17Z",
+   "ok": true
+  }
+ },
+ "market": {
+  "total_mcap_usd": 2520121110623.29,
+  "mcap_chg_24h_pct": -1.2704735588572122,
+  "btc_dominance_pct": 59.66482693302672,
+  "eth_dominance_pct": 10.270293431407437,
+  "stable_dominance_pct": 9.77513265212206
+ },
+ "btc_trend": {
+  "last": 74939.88,
+  "asof": "2026-11-10",
+  "sma50": 81390.6746,
+  "vs_sma50_pct": -7.92571708208939,
+  "sma200": 73141.19344999999,
+  "vs_sma200_pct": 2.4591977039992052,
+  "ret_7d_pct": -3.099263933382246,
+  "ret_30d_pct": -10.44286397343922,
+  "ret_90d_pct": 18.17985697281197,
+  "rv_30d_annual_pct": 34.84327058669728,
+  "below_90d_high_pct": 14.253486961795026
+ },
+ "eth_trend": {
+  "last": 2123.84,
+  "asof": "2026-11-10",
+  "sma50": 2457.6446,
+  "vs_sma50_pct": -13.582297456678639,
+  "sma200": 2152.55825,
+  "vs_sma200_pct": -1.3341450806267363,
+  "ret_7d_pct": -6.506312619957377,
+  "ret_30d_pct": -16.193542786340554,
+  "ret_90d_pct": 13.115216847128508,
+  "rv_30d_annual_pct": 48.519037567845736,
+  "below_90d_high_pct": 24.340422500089055
+ },
+ "eth_btc": {
+  "last": 0.028340584479185183,
+  "chg_30d_pct": -6.421240191508371,
+  "chg_90d_pct": -4.285535839537024
+ },
+ "stablecoins": {
+  "total_usd": 292967206926.06,
+  "asof": "2026-11-09",
+  "chg_7d_pct": -1.5718181163722034,
+  "chg_30d_pct": -4.260307016525466,
+  "chg_90d_pct": -1.7946511179742108
+ },
+ "coinbase_perps": {
+  "n": 29,
+  "median_funding_hourly_bps": 0.030000000000000002,
+  "median_funding_annual_pct": 2.628,
+  "share_negative": 0.3448275862068966,
+  "by_base": {
+   "BTC": {
+    "funding_hourly_bps": 0.060000000000000005,
+    "funding_annual_pct": 5.256,
+    "oi_usd": 145926175.0,
+    "volume_24h_usd": 357835708.0,
+    "price": 74930.0,
+    "contract_usd": 749.3000000000001
+   },
+   "ETH": {
+    "funding_hourly_bps": 0.1,
+    "funding_annual_pct": 8.760000000000002,
+    "oi_usd": 50315436.0,
+    "volume_24h_usd": 81275284.8,
+    "price": 2124.0,
+    "contract_usd": 212.4
+   },
+   "CDETEK": {
+    "funding_hourly_bps": -0.23,
+    "funding_annual_pct": -20.148,
+    "oi_usd": 5817865.2,
+    "volume_24h_usd": 126338274.8,
+    "price": 3743.8,
+    "contract_usd": 3743.8
+   },
+   "ZEC": {
+    "funding_hourly_bps": 0.13999999999999999,
+    "funding_annual_pct": 12.264,
+    "oi_usd": 13123662.0,
+    "volume_24h_usd": 69324832.5,
+    "price": 1169.25,
+    "contract_usd": 1169.25
+   },
+   "CDEUS5": {
+    "funding_hourly_bps": -0.27999999999999997,
+    "funding_annual_pct": -24.528,
+    "oi_usd": 6279978.3,
+    "volume_24h_usd": 64586669.7,
+    "price": 3044.1,
+    "contract_usd": 3044.1
+   },
+   "CDEAI": {
+    "funding_hourly_bps": 0.16,
+    "funding_annual_pct": 14.016,
+    "oi_usd": 2671557.3000000003,
+    "volume_24h_usd": 15520086.7,
+    "price": 2723.3,
+    "contract_usd": 2723.3
+   },
+   "CDEDEF": {
+    "funding_hourly_bps": 0.030000000000000002,
+    "funding_annual_pct": 2.628,
+    "oi_usd": 786738.4,
+    "volume_24h_usd": 9366439.6,
+    "price": 2657.9,
+    "contract_usd": 2657.9
+   },
+   "PAXG": {
+    "funding_hourly_bps": 0.25,
+    "funding_annual_pct": 21.900000000000002,
+    "oi_usd": 6130031.2,
+    "volume_24h_usd": 8233634.4,
+    "price": 4108.6,
+    "contract_usd": 4108.6
+   },
+   "SOL": {
+    "funding_hourly_bps": -0.2,
+    "funding_annual_pct": -17.520000000000003,
+    "oi_usd": 15798613.950000001,
+    "volume_24h_usd": 18878154.75,
+    "price": 86.31,
+    "contract_usd": 431.55
+   },
+   "CDECHN": {
+    "funding_hourly_bps": 0.46,
+    "funding_annual_pct": 40.296,
+    "oi_usd": 718312.0,
+    "volume_24h_usd": 3659432.0,
+    "price": 2828.0,
+    "contract_usd": 2828.0
+   },
+   "BNB": {
+    "funding_hourly_bps": 0.06999999999999999,
+    "funding_annual_pct": 6.132,
+    "oi_usd": 661968.0,
+    "volume_24h_usd": 947441.7,
+    "price": 689.55,
+    "contract_usd": 689.55
+   },
+   "AAVE": {
+    "funding_hourly_bps": 0.05,
+    "funding_annual_pct": 4.380000000000001,
+    "oi_usd": 932223.5999999999,
+    "volume_24h_usd": 4688768.7,
+    "price": 131.67,
+    "contract_usd": 658.3499999999999
+   },
+   "BCH": {
+    "funding_hourly_bps": -0.01,
+    "funding_annual_pct": -0.876,
+    "oi_usd": 794397.0,
+    "volume_24h_usd": 866333.4,
+    "price": 238.2,
+    "contract_usd": 238.2
+   },
+   "HYPE": {
+    "funding_hourly_bps": 0.0,
+    "funding_annual_pct": 0.0,
+    "oi_usd": 7144935.300000001,
+    "volume_24h_usd": 6686840.4,
+    "price": 74.73,
+    "contract_usd": 747.3000000000001
+   },
+   "AVAX": {
+    "funding_hourly_bps": -0.24000000000000002,
+    "funding_annual_pct": -21.024,
+    "oi_usd": 1329197.7,
+    "volume_24h_usd": 2108023.8,
+    "price": 8.67,
+    "contract_usd": 86.7
+   },
+   "LTC": {
+    "funding_hourly_bps": 0.01,
+    "funding_annual_pct": 0.876,
+    "oi_usd": 1063309.1,
+    "volume_24h_usd": 871918.6,
+    "price": 51.38,
+    "contract_usd": 256.90000000000003
+   },
+   "XRP": {
+    "funding_hourly_bps": -0.04,
+    "funding_annual_pct": -3.504,
+    "oi_usd": 21928108.650000002,
+    "volume_24h_usd": 59595954.6,
+    "price": 1.0983,
+    "contract_usd": 549.15
+   },
+   "LINK": {
+    "funding_hourly_bps": 0.0,
+    "funding_annual_pct": 0.0,
+    "oi_usd": 2706165.5500000003,
+    "volume_24h_usd": 2316686.0,
+    "price": 10.627,
+    "contract_usd": 531.35
+   },
+   "NEAR": {
+    "funding_hourly_bps": -0.08,
+    "funding_annual_pct": -7.008,
+    "oi_usd": 8373978.899999999,
+    "volume_24h_usd": 17283471.3,
+    "price": 3.6306,
+    "contract_usd": 1815.3
+   },
+   "SUI": {
+    "funding_hourly_bps": -0.13,
+    "funding_annual_pct": -11.388,
+    "oi_usd": 2950224.2,
+    "volume_24h_usd": 3249826.8,
+    "price": 0.8404,
+    "contract_usd": 420.20000000000005
+   },
+   "ONDO": {
+    "funding_hourly_bps": 0.13999999999999999,
+    "funding_annual_pct": 12.264,
+    "oi_usd": 2540569.5,
+    "volume_24h_usd": 6413311.8,
+    "price": 0.3717,
+    "contract_usd": 371.7
+   },
+   "ADA": {
+    "funding_hourly_bps": -0.060000000000000005,
+    "funding_annual_pct": -5.256,
+    "oi_usd": 1713714.0,
+    "volume_24h_usd": 3104049.0,
+    "price": 0.177,
+    "contract_usd": 177.0
+   },
+   "DOT": {
+    "funding_hourly_bps": 0.09,
+    "funding_annual_pct": 7.8839999999999995,
+    "oi_usd": 433827.0,
+    "volume_24h_usd": 279499.5,
+    "price": 0.855,
+    "contract_usd": 85.5
+   },
+   "XLM": {
+    "funding_hourly_bps": 0.02,
+    "funding_annual_pct": 1.752,
+    "oi_usd": 3596337.0000000005,
+    "volume_24h_usd": 5256468.0,
+    "price": 0.14724,
+    "contract_usd": 736.2
+   },
+   "ENA": {
+    "funding_hourly_bps": 0.11,
+    "funding_annual_pct": 9.636,
+    "oi_usd": 1433109.5999999999,
+    "volume_24h_usd": 2842487.15,
+    "price": 0.15311,
+    "contract_usd": 765.55
+   },
+   "HBAR": {
+    "funding_hourly_bps": 0.17,
+    "funding_annual_pct": 14.892,
+    "oi_usd": 1355734.45,
+    "volume_24h_usd": 1812423.95,
+    "price": 0.06667,
+    "contract_usd": 333.34999999999997
+   },
+   "DOGE": {
+    "funding_hourly_bps": 0.13,
+    "funding_annual_pct": 11.388,
+    "oi_usd": 1431187.7999999998,
+    "volume_24h_usd": 1418627.4,
+    "price": 0.06978,
+    "contract_usd": 348.9
+   },
+   "PEPE": {
+    "funding_hourly_bps": -0.21,
+    "funding_annual_pct": -18.396,
+    "oi_usd": 579810.4,
+    "volume_24h_usd": 7424339.0,
+    "price": 0.005122,
+    "contract_usd": 512.1999999999999
+   },
+   "SHIB": {
+    "funding_hourly_bps": 0.26,
+    "funding_annual_pct": 22.776,
+    "oi_usd": 174591.9,
+    "volume_24h_usd": 26856.9,
+    "price": 0.00441,
+    "contract_usd": 44.1
+   }
+  }
+ },
+ "hyperliquid": {
+  "n_liquid": 34,
+  "total_oi_usd": 8715633642.969913,
+  "median_funding_annual_pct": 10.950000000000001,
+  "btc_funding_annual_pct": 10.950000000000001,
+  "eth_funding_annual_pct": -3.7254528000000002,
+  "by_coin": {
+   "BTC": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 3177322623.7367997,
+    "volume_24h_usd": 2823431726.5218287
+   },
+   "ETH": {
+    "funding_annual_pct": -3.7254528000000002,
+    "oi_usd": 1679949485.1499999,
+    "volume_24h_usd": 1179739189.9858396
+   },
+   "SOL": {
+    "funding_annual_pct": -3.6671112,
+    "oi_usd": 407063745.77304,
+    "volume_24h_usd": 292423357.5656299
+   },
+   "AVAX": {
+    "funding_annual_pct": -27.677745599999998,
+    "oi_usd": 24169904.751815997,
+    "volume_24h_usd": 70479946.45843701
+   },
+   "BNB": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 36429968.05626,
+    "volume_24h_usd": 16616755.817310002
+   },
+   "ARB": {
+    "funding_annual_pct": 2.1923652000000002,
+    "oi_usd": 14229861.042124,
+    "volume_24h_usd": 14392405.765928997
+   },
+   "DOGE": {
+    "funding_annual_pct": -14.504019600000001,
+    "oi_usd": 52995213.38771,
+    "volume_24h_usd": 15271020.388399
+   },
+   "SUI": {
+    "funding_annual_pct": 3.6974208,
+    "oi_usd": 24680460.872968,
+    "volume_24h_usd": 19482413.77867
+   },
+   "kPEPE": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 56360581.718112,
+    "volume_24h_usd": 58673657.331185006
+   },
+   "LINK": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 48707626.728,
+    "volume_24h_usd": 8186280.394700001
+   },
+   "XRP": {
+    "funding_annual_pct": -10.9881936,
+    "oi_usd": 127827409.4972,
+    "volume_24h_usd": 128701783.9663
+   },
+   "AAVE": {
+    "funding_annual_pct": 3.7196712,
+    "oi_usd": 50997987.14559999,
+    "volume_24h_usd": 7788577.9192
+   },
+   "WLD": {
+    "funding_annual_pct": 5.022107999999999,
+    "oi_usd": 36278718.28046399,
+    "volume_24h_usd": 11704294.202512
+   },
+   "UNI": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 69247849.3947,
+    "volume_24h_usd": 13869313.125080006
+   },
+   "ZRO": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 42216291.79288,
+    "volume_24h_usd": 13502655.026270004
+   },
+   "ADA": {
+    "funding_annual_pct": -7.466673599999998,
+    "oi_usd": 25360253.906400003,
+    "volume_24h_usd": 10050090.314710002
+   },
+   "NEAR": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 147519627.61528,
+    "volume_24h_usd": 58199089.215229996
+   },
+   "MEME": {
+    "funding_annual_pct": 10.7352048,
+    "oi_usd": 359956.554,
+    "volume_24h_usd": 6468706.641184
+   },
+   "ONDO": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 18066174.36288,
+    "volume_24h_usd": 9229944.96193
+   },
+   "ENA": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 60084847.888500005,
+    "volume_24h_usd": 11530322.916870002
+   },
+   "PURR": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 10493338.979716,
+    "volume_24h_usd": 6826471.700013001
+   },
+   "HYPE": {
+    "funding_annual_pct": 4.08435,
+    "oi_usd": 1610961507.8823001,
+    "volume_24h_usd": 532100672.65576035
+   },
+   "FARTCOIN": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 19456210.943536,
+    "volume_24h_usd": 6023773.990601999
+   },
+   "TRUMP": {
+    "funding_annual_pct": -20.2764216,
+    "oi_usd": 9716808.490228,
+    "volume_24h_usd": 6094069.248220001
+   },
+   "VVV": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 60668473.290879995,
+    "volume_24h_usd": 6682051.903170001
+   },
+   "INIT": {
+    "funding_annual_pct": -1304.8378284,
+    "oi_usd": 2693940.59092,
+    "volume_24h_usd": 6749276.348580002
+   },
+   "PUMP": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 58785685.43065,
+    "volume_24h_usd": 27487023.34066699
+   },
+   "XPL": {
+    "funding_annual_pct": -4.5498563999999995,
+    "oi_usd": 36461499.944864,
+    "volume_24h_usd": 5363596.725200999
+   },
+   "WLFI": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 15921035.148536,
+    "volume_24h_usd": 6826391.105720998
+   },
+   "ZEC": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 499991496.78800005,
+    "volume_24h_usd": 401964369.42599994
+   },
+   "LIT": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 114084086.536,
+    "volume_24h_usd": 33825201.45279999
+   },
+   "XMR": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 149144817.49272,
+    "volume_24h_usd": 26096435.424949996
+   },
+   "GRAM": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 19099738.15491,
+    "volume_24h_usd": 5533969.696519997
+   },
+   "PONS": {
+    "funding_annual_pct": 10.950000000000001,
+    "oi_usd": 8286415.64192,
+    "volume_24h_usd": 5693470.437209997
+   }
+  }
+ },
+ "okx": {
+  "btc_funding_8h_pct": 0.00203693868376,
+  "btc_oi_usd": 3854277428.2997,
+  "btc_oi_chg_7d_pct": 6.2033363745268355,
+  "btc_oi_chg_30d_pct": 16.693417294652658,
+  "eth_funding_8h_pct": -0.00036005613532,
+  "eth_oi_usd": 1822735254.4356,
+  "eth_oi_chg_7d_pct": -1.2400339913308578,
+  "eth_oi_chg_30d_pct": 0.5053023984053606
+ },
+ "fear_greed": {
+  "value": 32,
+  "label": "Fear",
+  "avg_30d": 46.5
+ },
+ "macro": {
+  "DGS10": {
+   "last": 4.86,
+   "asof": "2026-11-06",
+   "chg_1m": -0.41999999999999993,
+   "chg_1m_pct": -7.954545454545448,
+   "chg_3m_pct": 4.516129032258065
+  },
+  "DGS2": {
+   "last": 4.51,
+   "asof": "2026-11-06",
+   "chg_1m": -0.2599999999999998,
+   "chg_1m_pct": -5.45073375262054,
+   "chg_3m_pct": 7.637231503579933
+  },
+  "DFF": {
+   "last": 3.88,
+   "asof": "2026-11-06",
+   "chg_1m": 0.0,
+   "chg_1m_pct": 0.0,
+   "chg_3m_pct": 6.887052341597788
+  },
+  "DTWEXBGS": {
+   "last": 121.8803,
+   "asof": "2026-11-06",
+   "chg_1m": 0.6245000000000118,
+   "chg_1m_pct": 0.5150269100529625,
+   "chg_3m_pct": 2.364592755715589
+  },
+  "SP500": {
+   "last": 7353.73,
+   "asof": "2026-11-05",
+   "chg_1m": -448.0400000000009,
+   "chg_1m_pct": -5.74279939039476,
+   "chg_3m_pct": -5.206609226517356
+  },
+  "VIXCLS": {
+   "last": 25.64,
+   "asof": "2026-11-06",
+   "chg_1m": 10.23,
+   "chg_1m_pct": 66.38546398442571,
+   "chg_3m_pct": 67.80104712041886
+  },
+  "BAMLH0A0HYM2": {
+   "last": 3.42,
+   "asof": "2026-11-06",
+   "chg_1m": 0.27,
+   "chg_1m_pct": 8.571428571428562,
+   "chg_3m_pct": 25.735294117647058
+  }
+ },
+ "rotation": {
+  "majors": {
+   "median_7d_pct": -3.6637,
+   "median_30d_pct": -12.1705,
+   "median_200d_pct": -6.213699999999999,
+   "n": 2
+  },
+  "l1": {
+   "median_7d_pct": -3.82495,
+   "median_30d_pct": -23.882150000000003,
+   "median_200d_pct": -5.6155,
+   "n": 10
+  },
+  "payments": {
+   "median_7d_pct": -10.9311,
+   "median_30d_pct": -20.77095,
+   "median_200d_pct": -19.88945,
+   "n": 4
+  },
+  "defi": {
+   "median_7d_pct": -4.89025,
+   "median_30d_pct": -19.3627,
+   "median_200d_pct": 39.41945,
+   "n": 10
+  },
+  "privacy": {
+   "median_7d_pct": -1.4016499999999998,
+   "median_30d_pct": 3.5338,
+   "median_200d_pct": 147.3286,
+   "n": 2
+  },
+  "memes": {
+   "median_7d_pct": -3.4705,
+   "median_30d_pct": -18.4808,
+   "median_200d_pct": -28.0033,
+   "n": 3
+  },
+  "exchange": {
+   "median_7d_pct": -1.5823,
+   "median_30d_pct": -10.4322,
+   "median_200d_pct": -6.9189,
+   "n": 7
+  },
+  "gold": {
+   "median_7d_pct": 4.4703,
+   "median_30d_pct": -1.5204,
+   "median_200d_pct": -12.101849999999999,
+   "n": 2
+  }
+ },
+ "regime": {
+  "label": "mixed_range",
+  "score": -1,
+  "n_votes": 9,
+  "votes": [
+   {
+    "name": "btc_vs_sma200",
+    "vote": 1,
+    "evidence": "BTC +2.5% vs 200d SMA"
+   },
+   {
+    "name": "btc_vs_sma50",
+    "vote": -1,
+    "evidence": "BTC -7.9% vs 50d SMA"
+   },
+   {
+    "name": "btc_ret_90d",
+    "vote": 1,
+    "evidence": "BTC +18.2% over 90d"
+   },
+   {
+    "name": "eth_vs_sma200",
+    "vote": -1,
+    "evidence": "ETH -1.3% vs 200d SMA"
+   },
+   {
+    "name": "stables_30d",
+    "vote": -1,
+    "evidence": "stablecoin supply -4.26% over 30d"
+   },
+   {
+    "name": "funding",
+    "vote": 0,
+    "evidence": "median perp funding +2.6% annualised"
+   },
+   {
+    "name": "oi_30d",
+    "vote": 1,
+    "evidence": "BTC open interest +16.7% over 30d"
+   },
+   {
+    "name": "dxy_1m",
+    "vote": 0,
+    "evidence": "broad dollar index +0.52% over 1m"
+   },
+   {
+    "name": "vix",
+    "vote": -1,
+    "evidence": "VIX 25.6"
+   }
+  ]
+ }
+}

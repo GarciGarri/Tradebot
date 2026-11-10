@@ -42,7 +42,16 @@ def fetch_range(feed: CcxtFeed, symbol: str, start_ms: int, end_ms: int, page: i
     cursor = start_ms
     empty = 0
     while cursor < end_ms:
-        bars = feed.closed_bars(symbol, limit=page, since_ms=cursor, now_ms=end_ms)
+        bars = None
+        for attempt in range(5):                       # transient network errors: back off and retry
+            try:
+                bars = feed.closed_bars(symbol, limit=page, since_ms=cursor, now_ms=end_ms)
+                break
+            except Exception as exc:
+                if attempt == 4:
+                    raise
+                log.warning("%s: fetch failed (%s), retry %d", symbol, type(exc).__name__, attempt + 1)
+                time.sleep(2 ** (attempt + 1))
         fresh = [b for b in bars if b.ts >= cursor]
         if not fresh:
             empty += 1
