@@ -119,7 +119,6 @@ class RuntimeCfg(BaseModel):
     risk_tick_s: float = Field(20.0, gt=0)
     candle_settle_s: float = Field(5.0, ge=0)      # wait after candle close before reading it
     heartbeat_max_age_s: float = Field(180.0, gt=0)
-    health_port: int = 8080
     nightly_utc_hour: int = Field(0, ge=0, le=23)
     nightly_utc_minute: int = Field(20, ge=0, le=59)
 

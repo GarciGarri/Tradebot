@@ -132,6 +132,12 @@ class TradingCore:
     def risk_tick(self, now_ms: int, ranges: dict[str, PriceRange]) -> None:
         """Protective exits and account-level limits. `ranges` holds what price did since the
         last tick: a whole bar in backtests, a single price in live operation."""
+        if not self.kill and self.recorder.get("kill", False):
+            # the operator latched the kill switch from the CLI while we were running
+            self.kill = True
+            self.flatten(now_ms, "manual_kill", {s: r.open for s, r in ranges.items()})
+            self._event(now_ms, "critical", "kill_switch", "kill switch latched by the operator: flattened and halted.",
+                        force=True)
         account = self.account(now_ms)
         for sym, pos in list(account.positions.items()):
             rng = ranges.get(sym)

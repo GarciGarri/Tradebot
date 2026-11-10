@@ -7,7 +7,7 @@ them, in code.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
 from ..types import AccountState, Fill, Instrument, OrderIntent, Position, Side
 
@@ -50,6 +50,25 @@ class Ledger:
         self.funding_total = 0.0
         self.closed: list[ClosedTrade] = []
         self._risk_at_entry: dict[str, float] = {}
+
+    # ---- persistence (so a paper account survives a restart) -------------------
+    def to_dict(self) -> dict:
+        return {"cash": self.cash, "peak_equity": self.peak_equity, "day": self.day,
+                "day_start_equity": self.day_start_equity, "fees_total": self.fees_total,
+                "funding_total": self.funding_total, "marks": dict(self.marks),
+                "risk_at_entry": dict(self._risk_at_entry),
+                "positions": {s: asdict(p) for s, p in self.positions.items()}}
+
+    def restore(self, d: dict) -> None:
+        self.cash = float(d["cash"])
+        self.peak_equity = float(d["peak_equity"])
+        self.day = int(d["day"])
+        self.day_start_equity = float(d["day_start_equity"])
+        self.fees_total = float(d.get("fees_total", 0.0))
+        self.funding_total = float(d.get("funding_total", 0.0))
+        self.marks = {k: float(v) for k, v in d.get("marks", {}).items()}
+        self._risk_at_entry = {k: float(v) for k, v in d.get("risk_at_entry", {}).items()}
+        self.positions = {s: Position(**p) for s, p in d.get("positions", {}).items() if s in self.instruments}
 
     # ---- marks & equity ------------------------------------------------------
     def mark(self, symbol: str, price: float) -> None:

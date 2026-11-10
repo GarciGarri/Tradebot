@@ -41,7 +41,6 @@ runtime:
   risk_tick_s: 20
   candle_settle_s: 5
   heartbeat_max_age_s: 180
-  health_port: 8080
   nightly_utc_hour: 0
   nightly_utc_minute: 20
 

@@ -76,7 +76,12 @@ def label_decisions(rows: list[dict], bars: dict[str, list[Bar]], fees: FeeModel
             out.append(r)
             continue
         sym, sf = r["symbol"], r.get("stop_frac")
-        i = index.get(sym, {}).get(r["ts"])          # bar that OPENS at the decision time
+        if sym not in bars or not bars[sym]:
+            continue
+        tf = bars[sym][0].tf_ms
+        # Live decisions are stamped a few seconds after the candle close; floor to the bar
+        # that opened at that close. That bar is the first one the decision could trade in.
+        i = index[sym].get((r["ts"] // tf) * tf)
         if i is None or not sf:
             continue
         series = bars[sym]

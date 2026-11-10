@@ -1,0 +1,55 @@
+# 24/7 runtime. Paper mode by default; nothing here can send a real order unless config sets
+# mode: live AND .env carries the live approval phrase AND exchange keys exist.
+#
+#   docker compose up -d --build      start (survives reboots: restart policy below)
+#   docker compose ps                 health
+#   docker compose logs -f bot        logs
+#   docker compose exec bot tradebot status
+#   docker compose exec bot tradebot kill      manual kill switch
+services:
+  bot:
+    build: .
+    command: ["tradebot", "run"]
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./state:/app/state
+      - ./reports:/app/reports
+      - ./config:/app/config
+    healthcheck:
+      test: ["CMD", "tradebot", "healthcheck"]
+      interval: 60s
+      timeout: 10s
+      start_period: 120s
+      retries: 3
+    stop_grace_period: 30s
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "5"}
+
+  nightly:
+    build: .
+    command: ["tradebot", "nightly", "--loop"]
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./state:/app/state
+      - ./reports:/app/reports
+      - ./config:/app/config
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    logging:
+      driver: json-file
+      options: {max-size: "20m", max-file: "5"}
