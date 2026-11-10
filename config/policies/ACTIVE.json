@@ -1,0 +1,7 @@
+{
+  "paper": 1,
+  "live": null,
+  "history": [
+    {"ts": "2026-11-10T00:00:00Z", "target": "paper", "from": null, "to": 1, "by": "bootstrap", "reason": "initial policy"}
+  ]
+}

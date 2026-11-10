@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+# secrets never live in the repo
+.env
+.env.*
+!.env.example
+# runtime state and caches
+state/*
+!state/.gitkeep
+data_cache/
+reports/nightly/*
+!reports/nightly/.gitkeep

@@ -1,0 +1,13 @@
+# HARD RISK LIMITS. Human-edited only.
+# No model, no nightly job and no policy file can change these. Values are validated against
+# absolute ceilings compiled into tradebot/config.py; a value above a ceiling refuses to load.
+risk_per_trade: 0.02          # 2% of equity at risk per trade (stop distance + costs)
+max_daily_loss: 0.05          # 5%: flatten and stop new risk until the next UTC day
+max_open_positions: 3
+max_leverage: 2.0             # gross notional / equity. Also the EU retail cap for crypto CFDs.
+kill_switch_drawdown: 0.15    # 15% from peak equity: flatten, latch, manual resume only
+max_price_deviation: 0.02     # reject an order whose reference price is >2% from the mark
+max_participation: 0.02       # max order notional as a share of recent hourly $ volume
+near_limit_frac: 0.70          # daily loss / leverage at 70% of their limit: no new entries
+reduce_frac: 0.90              # any limit (incl. drawdown) at 90%: no new entries, losers are cut
+drawdown_caution_scale: 0.5    # drawdown between 70% and 90% of the kill level: half risk per trade

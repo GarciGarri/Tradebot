@@ -1,0 +1,29 @@
+version: 1
+parent: null
+created: '2026-11-10T00:00:00Z'
+note: >-
+  Bootstrap policy. Every number here is a starting hypothesis from the brief, not evidence
+  of an edge: gate at setup_quality >= 2, direction_confidence > 0.80, risk_state == safe;
+  quarter Kelly on a confidence shrunk halfway to 0.5 until real outcomes exist.
+prompt_version: reflex-v1
+gate:
+  min_setup_quality: 2
+  min_direction_confidence: 0.8
+  block_on_toxic_flow: true
+pause:
+  confidence_floor: 0.6
+  cooldown_bars: 24
+sizing:
+  kelly_fraction: 0.25
+calibration:
+  method: shrink
+  shrink: 0.5
+  bins: []
+exits:
+  stop_atr_mult: 2.0
+  min_stop_pct: 0.8
+  max_stop_pct: 6.0
+  take_profit_r: 2.0
+  max_hold_bars: 72
+  flip_exit_confidence: 0.7
+rule_params: {}

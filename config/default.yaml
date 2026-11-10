@@ -1,0 +1,53 @@
+# Tradebot settings. Secrets never go here: see .env.example.
+# Hard risk limits live in config/risk.yaml. Trading thresholds live in config/policies/.
+
+mode: paper              # paper | preview | live   (live also needs TRADEBOT_LIVE_ACK + keys)
+paper_balance: 1000.0    # USD. Coinbase removed USDT for EEA users, so the account currency is USD/USDC.
+
+exchange:
+  id: coinbase           # ccxt id of Coinbase Advanced
+  market_type: swap      # perpetual-style futures
+  quote: USD
+  timeframe: 1h
+  fees:
+    # ESTIMATES. Replace with your account's fee schedule after `tradebot preflight`.
+    taker: 0.0010          # 0.10% per side
+    maker: 0.0005
+    slippage_bps: 3.0
+    impact_coeff: 0.10
+    funding_bps_per_hour: 0.10   # only used when the venue's funding rate is unknown
+
+guards:
+  min_bars: 200
+  max_bar_lag_s: 90
+  max_book_age_s: 20
+  max_clock_skew_ms: 2000
+  require_book: true
+  max_spread_bps: 25
+
+reflex:
+  backend: haiku           # haiku | rules | jev (jev is a documented stub: no API docs were provided)
+  model: claude-haiku-5-5
+  effort: low
+  thinking: adaptive
+  deadline_ms: 8000        # a decision later than this is discarded and the candle is skipped
+  max_tokens: 1024
+  snapshot_token_budget: 400
+
+alerts:
+  min_interval_s: 300
+
+runtime:
+  risk_tick_s: 20
+  candle_settle_s: 5
+  heartbeat_max_age_s: 180
+  health_port: 8080
+  nightly_utc_hour: 0
+  nightly_utc_minute: 20
+
+context_symbols: ["BTC/USD:USD", "ETH/USD:USD"]
+off_limits_rule: outside_top_50
+state_dir: state
+reports_dir: reports
+setups_dir: config/setups
+policies_dir: config/policies
