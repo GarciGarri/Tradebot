@@ -54,32 +54,38 @@ def size_position(*, p: float, stop_frac: float, take_profit_r: float, equity: f
     if equity <= 0 or price <= 0 or stop_frac <= 0:
         return SizeResult(0.0, p, 0.0, 0.0, 0.0, 0.0, ("bad_inputs",))
     unit = instrument.contract_size * price                       # notional of one contract
-    cost = round_trip_cost_frac(fees, unit, bar_dollar_volume, hold_bars)
-    win = take_profit_r * stop_frac - cost
-    loss = stop_frac + cost
-    if win <= 0:
-        return SizeResult(0.0, p, 0.0, 0.0, 0.0, 0.0, ("costs_exceed_target",))
-    b = win / loss
-    f_star = kelly_full(p, b)
-    if f_star <= 0:
-        return SizeResult(0.0, p, b, f_star, 0.0, 0.0, ("no_edge_after_costs",))
-    risk_frac = kf * f_star
+    room = limits.max_leverage * equity - gross_notional
+    liq = limits.max_participation * bar_dollar_volume if bar_dollar_volume is not None else None
     budget = limits.risk_per_trade * risk_scale
     if risk_scale < 1.0:
         reasons.append("drawdown_caution")
-    if risk_frac > budget:
-        risk_frac = budget
-        reasons.append("capped_risk_per_trade")
-    notional = risk_frac * equity / loss
-    room = limits.max_leverage * equity - gross_notional
-    if notional > room:
-        notional = max(0.0, room)
-        reasons.append("capped_leverage")
-    if bar_dollar_volume is not None:
-        liq = limits.max_participation * bar_dollar_volume
-        if notional > liq:
+    # Market impact depends on the order size and the order size depends on the cost, so
+    # iterate: start from one contract and re-price the cost at the size just computed.
+    notional, b, f_star, loss = unit, 0.0, 0.0, stop_frac
+    capped: set[str] = set()
+    for _ in range(4):
+        cost = round_trip_cost_frac(fees, max(notional, unit), bar_dollar_volume, hold_bars)
+        win = take_profit_r * stop_frac - cost
+        loss = stop_frac + cost
+        if win <= 0:
+            return SizeResult(0.0, p, 0.0, 0.0, 0.0, 0.0, ("costs_exceed_target",))
+        b = win / loss
+        f_star = kelly_full(p, b)
+        if f_star <= 0:
+            return SizeResult(0.0, p, b, f_star, 0.0, 0.0, ("no_edge_after_costs",))
+        capped = set()
+        risk_frac = kf * f_star
+        if risk_frac > budget:
+            risk_frac = budget
+            capped.add("capped_risk_per_trade")
+        notional = risk_frac * equity / loss
+        if notional > room:
+            notional = max(0.0, room)
+            capped.add("capped_leverage")
+        if liq is not None and notional > liq:
             notional = liq
-            reasons.append("capped_liquidity")
+            capped.add("capped_liquidity")
+    reasons.extend(sorted(capped))
     qty = instrument.round_qty_down(notional / unit)
     qty = min(qty, instrument.max_qty)
     if qty <= 0:

@@ -14,7 +14,7 @@ exchange:
     taker: 0.0010          # 0.10% per side
     maker: 0.0005
     slippage_bps: 3.0
-    impact_coeff: 0.10
+    impact_coeff: 0.01       # square-root impact: frac = coeff * sqrt(notional / hourly $ volume)
     funding_bps_per_hour: 0.10   # only used when the venue's funding rate is unknown
 
 guards:

@@ -79,7 +79,9 @@ class FeeModel(BaseModel):
     taker: float = Field(0.0010, ge=0)             # 0.10% per side
     maker: float = Field(0.0005, ge=0)
     slippage_bps: float = Field(3.0, ge=0)         # fixed part, each side
-    impact_coeff: float = Field(0.10, ge=0)        # extra bps = coeff*1e4*sqrt(notional/bar$vol)
+    # Square-root impact per side: frac = impact_coeff * sqrt(order notional / hourly $ volume).
+    # 0.01 is about 1.6x the textbook value for 3% daily volatility (0.03 / sqrt(24)).
+    impact_coeff: float = Field(0.01, ge=0)
     funding_bps_per_hour: float = Field(0.10, ge=0)  # used only when no real funding is known
 
 
