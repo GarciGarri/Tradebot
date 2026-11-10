@@ -65,6 +65,12 @@ class MemoryRecorder:
             self.decisions.append({"id": self._n, **row})
         return self._n
 
+    def label_decision(self, decision_id: int, outcome: int, outcome_r: float) -> None:
+        for d in self.decisions:
+            if d["id"] == decision_id:
+                d.update(outcome=outcome, outcome_r=outcome_r, labeled=1)
+                return
+
     def order(self, row: dict) -> None:
         self.orders.append(row)
 
@@ -123,6 +129,9 @@ class SqliteRecorder:
 
     def decision(self, row: dict) -> int:
         return self._insert("decisions", row)
+
+    def label_decision(self, decision_id: int, outcome: int, outcome_r: float) -> None:
+        self._exec("UPDATE decisions SET outcome=?, outcome_r=?, labeled=1 WHERE id=?", (outcome, outcome_r, decision_id))
 
     def order(self, row: dict) -> None:
         self._insert("orders", row)

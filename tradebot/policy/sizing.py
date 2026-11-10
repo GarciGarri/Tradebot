@@ -54,7 +54,10 @@ def size_position(*, p: float, stop_frac: float, take_profit_r: float, equity: f
     if equity <= 0 or price <= 0 or stop_frac <= 0:
         return SizeResult(0.0, p, 0.0, 0.0, 0.0, 0.0, ("bad_inputs",))
     unit = instrument.contract_size * price                       # notional of one contract
-    room = limits.max_leverage * equity - gross_notional
+    # Entries may only fill the "safe" leverage band. Sizing right up to the hard limit would
+    # put the account in the `reduce` state by its own entry and make it cut that position on
+    # the next candle. The hard limit itself is still enforced by the risk layer.
+    room = limits.near_limit_frac * limits.max_leverage * equity - gross_notional
     liq = limits.max_participation * bar_dollar_volume if bar_dollar_volume is not None else None
     budget = limits.risk_per_trade * risk_scale
     if risk_scale < 1.0:

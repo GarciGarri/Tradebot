@@ -305,6 +305,14 @@ class TradingCore:
             return
 
         # ---- flat: gate -> size -> hard risk check -> order
+        dd_usage = account.drawdown / self.limits.kill_switch_drawdown
+        if dd_usage >= self.limits.reduce_frac:
+            # Not silent: this close to the kill level no new risk is opened, so the account
+            # cannot trade its way back. A human has to review and resume.
+            self.alerts.alert("critical", f"drawdown_soft_halt:{now_ms // DAY_MS}",
+                              f"drawdown {account.drawdown:.1%} is within {1 - self.limits.reduce_frac:.0%} of the kill "
+                              f"level ({self.limits.kill_switch_drawdown:.0%}). New risk is blocked until a human "
+                              "reviews and runs `tradebot resume --reset-peak`.")
         gate = evaluate_gate(out, self.policy, setup, snap.code_risk_state, now_ms, snap.price,
                              self.paused(symbol, now_ms))
         if not gate.allow:

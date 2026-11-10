@@ -129,8 +129,10 @@ def test_no_trade_without_edge_or_when_costs_eat_the_target():
 
 
 def test_leverage_and_liquidity_caps():
-    r = size(stop_frac=0.008, gross_notional=150_000.0)           # only 50k of leverage room left
-    assert "capped_leverage" in r.reasons and r.notional <= 50_000.0
+    # entries may use leverage only up to near_limit_frac * max_leverage = 1.4x, so 40k of room is left
+    r = size(stop_frac=0.008, gross_notional=100_000.0)
+    assert "capped_leverage" in r.reasons and r.notional <= 40_000.0
+    assert size(stop_frac=0.008, gross_notional=150_000.0).qty == 0
     r2 = size(bar_dollar_volume=100_000.0)                        # 2% participation -> 2k
     assert "capped_liquidity" in r2.reasons and r2.notional <= 2_000.0 + 1e-9
 
@@ -159,7 +161,7 @@ def test_realised_risk_never_exceeds_budget_property():
         assert r.qty >= 0 and r.qty == int(r.qty)
         assert r.risk_fraction <= LIM.risk_per_trade + 1e-9
         if r.qty:
-            assert r.notional <= LIM.max_leverage * eq + 1e-6
+            assert r.notional <= LIM.near_limit_frac * LIM.max_leverage * eq + 1e-6
             assert r.qty * cs * price * stop <= LIM.risk_per_trade * eq + 1e-6
 
 

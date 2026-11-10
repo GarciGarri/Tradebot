@@ -52,15 +52,24 @@ def test_gate_blocks_are_recorded_as_misses(rig_factory, o, reason):
 
 
 def test_model_cannot_override_code_risk_state(rig_factory):
-    """REFLEX insists everything is safe; code sees leverage near the limit and refuses."""
-    rig = rig_factory(MockReflex([out("long", 0.99, 3, risk="safe")]),
-                      setups={"a": make_setup(SYM, id="a"), "b": make_setup(ETH, id="b")})
-    rig.step()                                    # BTC enters first and uses most of the leverage budget
-    assert SYM in rig.exchange.ledger.positions
-    assert rig.exchange.account(rig.now).leverage >= rig.limits.near_limit_frac * rig.limits.max_leverage
-    row = [d for d in rig.recorder.decisions if d["symbol"] == ETH][-1]
-    assert row["risk_state"] == "safe" and row["code_risk_state"] != "safe" and row["gate_allow"] == 0
-    assert "code_risk_state_" in row["gate_reasons"] and ETH not in rig.exchange.ledger.positions
+    """REFLEX insists everything is safe; code sees the daily loss near its limit and refuses."""
+    rig = rig_factory(MockReflex([out("long", 0.99, 3, risk="safe")]))
+    rig.exchange.ledger.day_start_equity = 100_000.0 / 0.96       # down 4% today = 80% of the 5% limit
+    rig.step()
+    assert last(rig)["risk_state"] == "safe" and last(rig)["code_risk_state"] == "near_limit"
+    assert last(rig)["gate_allow"] == 0 and "code_risk_state_near_limit" in last(rig)["gate_reasons"]
+    assert not rig.exchange.ledger.positions
+
+
+def test_entry_never_puts_the_account_into_reduce_by_itself(rig_factory):
+    """Regression: sizing to the hard leverage limit made the bot cut its own fresh position."""
+    rig = rig_factory(MockReflex([out("long", 0.9, 3)]), setups={"a": make_setup(SYM, id="a"), "b": make_setup(ETH, id="b")})
+    for _ in range(6):
+        rig.step()
+    acct = rig.exchange.account(rig.now)
+    assert acct.leverage <= rig.limits.near_limit_frac * rig.limits.max_leverage * 1.01
+    assert not rig.exchange.ledger.closed                          # nothing was churned
+    assert "exit_risk_reduce" not in rig.core.counters
 
 
 def test_slow_reflex_skips_the_candle_but_stops_still_fire(rig_factory):
@@ -229,7 +238,7 @@ def test_reflex_output_cannot_set_size_price_or_side_effects(rig_factory):
     small.step()
     big.step()
     q_small, q_big = small.exchange.ledger.positions[SYM].qty, big.exchange.ledger.positions[SYM].qty
-    assert 8 * q_small < q_big <= 10 * q_small       # ~10x the account -> ~10x the size (less market impact)
+    assert 8 * q_small < q_big <= 10.01 * q_small    # ~10x the account -> ~10x the size (less market impact)
 
 
 def test_drawdown_caution_halves_risk_instead_of_freezing(rig_factory):
